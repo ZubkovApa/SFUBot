@@ -17,6 +17,6 @@ def faq_keyboard(faq_items):
     kb = InlineKeyboardMarkup(
         inline_keyboard=[
             [InlineKeyboardButton(text=q, callback_data=f'faq:{qid}')] for qid, q in faq_items
-        ] + [[InlineKeyboardButton(text='↩️ Назад', callback_data='back:menu')]]
+        ]
     )
     return kb
