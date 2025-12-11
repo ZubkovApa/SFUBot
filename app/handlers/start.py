@@ -11,11 +11,11 @@ async def cmd_start(message: types.Message):
     user = user_exists(tg_id)
     if user:
         await message.answer(
-            'С возвращением! Вы уже заполнили анкету. Главное меню:',
+            'С возвращением!',
             reply_markup=main_menu()
         )
     else:
         await message.answer(
-            'Привет! Я бот школы кулинарии. Могу ответить на часто задаваемые вопросы или принять вашу заявку.',
+            'Привет! Я бот школы кулинарии, могу ответить на ваши вопросы и рассказать о наших программах. Давайте познакомимся?',
             reply_markup=main_menu()
         )

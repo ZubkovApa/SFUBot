@@ -1,0 +1,29 @@
+# Секретные конфигурационные файлы
+.env
+.env.local
+.env.*.local
+.env.production
+
+# Файлы базы данных
+data/database.db
+data/*.db
+*.db
+*.sqlite3
+*.db-journal
+
+# Директории IDE
+.idea/
+.vscode/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Логи и временные файлы
+*.log
+*.tmp
+*.temp
+
+# Питоновские виртуальные окружения
+venv/
+env/
+ENV/

@@ -26,36 +26,36 @@ async def start_survey(message: types.Message, state: FSMContext):
         return
     await state.clear()
     await state.set_state(Survey.first_name)
-    await message.answer('Пожалуйста, введите ваше имя (текстом):')
+    await message.answer('Пожалуйста, введите ваше имя')
 
 @router.message(Survey.first_name)
 async def process_first_name(message: types.Message, state: FSMContext):
     await state.update_data(first_name=message.text.strip())
     await state.set_state(Survey.last_name)
-    await message.answer('Введите вашу фамилию:')
+    await message.answer('Введите вашу фамилию')
 
 @router.message(Survey.last_name)
 async def process_last_name(message: types.Message, state: FSMContext):
     await state.update_data(last_name=message.text.strip())
     await state.set_state(Survey.email)
-    await message.answer('Введите ваш email (или оставьте пустым):')
+    await message.answer('Введите ваш email:')
 
 @router.message(Survey.email)
 async def process_email(message: types.Message, state: FSMContext):
     email = message.text.strip()
     # Базовая валидация — можно расширить
     if email and ('@' not in email or '.' not in email):
-        await message.answer('Пожалуйста, введите корректный email или оставьте поле пустым.')
+        await message.answer('Пожалуйста, введите корректный email')
         return
     await state.update_data(email=email)
     await state.set_state(Survey.phone)
-    await message.answer('Введите номер телефона в международном формате, например +79161234567:')
+    await message.answer('Введите номер телефона:')
 
 @router.message(Survey.phone)
 async def process_phone(message: types.Message, state: FSMContext):
     phone = message.text.strip()
     if not PHONE_RE.match(phone):
-        await message.answer('Некорректный номер. Введите номер в формате +79161234567 (от 7 до 15 цифр).')
+        await message.answer('Некорректный номер. Введите номер в формате +79161234567')
         return
     await state.update_data(phone=phone)
     await state.set_state(Survey.city)
@@ -65,7 +65,7 @@ async def process_phone(message: types.Message, state: FSMContext):
 async def process_city(message: types.Message, state: FSMContext):
     await state.update_data(city=message.text.strip())
     await state.set_state(Survey.level)
-    await message.answer('Введите желаемый уровень курса (короткий текст):')
+    await message.answer('Введите ваш курс')
 
 @router.message(Survey.level)
 async def process_level(message: types.Message, state: FSMContext):
@@ -76,7 +76,7 @@ async def process_level(message: types.Message, state: FSMContext):
     # Сохраняем только при полном заполнении
     save_user(data)
     await state.clear()
-    await message.answer('Спасибо! Ваша анкета сохранена. Наш менеджер свяжется с вами.', reply_markup=main_menu())
+    await message.answer('Спасибо! Ваша анкета сохранена', reply_markup=main_menu())
 
 @router.message(lambda message: message.text == '/cancel')
 async def cancel_cmd(message: types.Message, state: FSMContext):
