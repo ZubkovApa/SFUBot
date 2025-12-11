@@ -1,6 +1,6 @@
 from aiogram import Router
 from aiogram.types import Message
-from keyboard import back_keyboard, main_keyboard
+from keyboard import main_keyboard
 
 # Создаем роутер
 about_router = Router()
@@ -23,14 +23,5 @@ async def about_command(message: Message):
 📍 Адрес: г. Москва, ул. Кулинарная, д. 15
 📞 Телефон: +7 (495) 123-45-67
 ⏰ Время работы: Пн-Пт 9:00-21:00, Сб-Вс 10:00-18:00
-
-<b>Следите за нами в соцсетях:</b>
-📷 Instagram: @gastroschool
-📹 YouTube: Школа Гастрономии
-👥 VK: vk.com/gastroschool
     """
-    await message.answer(about_text, reply_markup=back_keyboard)
-
-@about_router.message(lambda message: message.text == '⬅️ Назад в меню')
-async def back_to_menu(message: Message):
-    await message.answer("Возвращаю в главное меню:", reply_markup=main_keyboard)
+    await message.answer(about_text, reply_markup=main_keyboard)  # Возврат в главное меню сразу
