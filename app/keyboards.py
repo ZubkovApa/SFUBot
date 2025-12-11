@@ -20,3 +20,5 @@ def faq_keyboard(faq_items):
         ]
     )
     return kb
+
+# Тест

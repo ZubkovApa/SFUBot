@@ -42,3 +42,5 @@ async def contacts_admin(message: types.Message):
     """Показ контактов администратора."""
     await message.answer('Для связи с администратором: +7 900 000-00-00 или admin@example.com')
 
+
+# Тест

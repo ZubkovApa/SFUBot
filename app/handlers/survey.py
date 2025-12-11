@@ -82,3 +82,5 @@ async def process_level(message: types.Message, state: FSMContext):
 async def cancel_cmd(message: types.Message, state: FSMContext):
     await state.clear()
     await message.answer('Опрос отменён.', reply_markup=main_menu())
+
+# Тест

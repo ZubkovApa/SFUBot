@@ -65,3 +65,5 @@ def user_exists(tg_id: int) -> Optional[sqlite3.Row]:
     row = cur.fetchone()
     conn.close()
     return row
+
+# Тест
