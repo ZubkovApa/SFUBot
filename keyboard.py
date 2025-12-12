@@ -9,7 +9,7 @@ main_keyboard = ReplyKeyboardMarkup(
         ],
         [
             KeyboardButton(text='ℹ️ О нас'),
-            KeyboardButton(text='📞 Контакты')
+            KeyboardButton(text='📞 Связь с администратором')
         ]
     ],
     resize_keyboard=True
@@ -19,10 +19,10 @@ main_keyboard = ReplyKeyboardMarkup(
 def get_faq_keyboard():
     return ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton(text='💰 Стоимость курсов')],
-            [KeyboardButton(text='⏱️ Длительность обучения')],
-            [KeyboardButton(text='📅 Начало занятий')],
-            [KeyboardButton(text='🎓 Что нужно для обучения')],
+            [KeyboardButton(text='Ваш институт государственный или частный?')],
+            [KeyboardButton(text='Предусмотрены ли бюджетные места для поступления?')],
+            [KeyboardButton(text='Могу ли я обучаться заочно?')],
+            [KeyboardButton(text='Что нужно для поступления?')],
             [KeyboardButton(text='⬅️ В главное меню')]
         ],
         resize_keyboard=True
@@ -32,10 +32,10 @@ def get_faq_keyboard():
 def get_links_keyboard():
     return ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton(text='📚 Учебные материалы')],
-            [KeyboardButton(text='🍳 Практические задания')],
-            [KeyboardButton(text='🌟 Дополнительные ресурсы')],
-            [KeyboardButton(text='🏨 Партнеры школы')],
+            [KeyboardButton(text='📚 Образовательные программы')],
+            [KeyboardButton(text='🍳 Наши соцсети')],
+            [KeyboardButton(text='🌟 Дополнительные материалы')],
+            [KeyboardButton(text='🏨 Ресторан #Истории')],
             [KeyboardButton(text='⬅️ В главное меню')]
         ],
         resize_keyboard=True

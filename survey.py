@@ -53,6 +53,10 @@ async def process_email(message: Message, state: FSMContext):
 # Обработчик телефона
 @survey_router.message(Survey.phone)
 async def process_phone(message: Message, state: FSMContext):
+    # Простая валидация номера телефона
+    if len(message.text) != 11 or ('7' not in message.text and '8' not in message.text):
+        await message.answer("Пожалуйста, введите корректный номер телефона (например: 79991234567):")
+        return
     await state.update_data(phone=message.text)
     await state.set_state(Survey.city)
     await message.answer("Введите ваш город:")
@@ -67,10 +71,11 @@ async def process_city(message: Message, state: FSMContext):
     # Клавиатура для выбора курса
     course_keyboard = ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton(text="🍳 Основы кулинарии")],
-            [KeyboardButton(text="🎂 Кондитерское искусство")],
-            [KeyboardButton(text="🍷 Искусство сомелье")],
-            [KeyboardButton(text="🥘 Профессиональная кухня")]
+            [KeyboardButton(text="Школа гастрономии")],
+            [KeyboardButton(text="Школа ресторанного менеджмента")],
+            [KeyboardButton(text="Школа кондитерского искусства")],
+            [KeyboardButton(text="Школа отельного менеджмента")],
+            [KeyboardButton(text="Стратегическое управление в индустрии гостеприимства")]
         ],
         resize_keyboard=True
     )
@@ -106,7 +111,6 @@ async def process_course(message: Message, state: FSMContext):
         f"📞 <b>Телефон:</b> {data['phone']}\n"
         f"🏙️ <b>Город:</b> {data['city']}\n"
         f"🎓 <b>Курс:</b> {data['course']}\n\n"
-        f"<i>Администратор свяжется с вами в течение 24 часов для подтверждения записи.</i>\n\n"
         f"Теперь вам доступны все функции бота!"
     )
 
