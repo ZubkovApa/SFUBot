@@ -19,10 +19,10 @@ main_keyboard = ReplyKeyboardMarkup(
 def get_faq_keyboard():
     return ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton(text='Ваш институт государственный или частный?')],
-            [KeyboardButton(text='Предусмотрены ли бюджетные места для поступления?')],
-            [KeyboardButton(text='Могу ли я обучаться заочно?')],
-            [KeyboardButton(text='Что нужно для поступления?')],
+            [KeyboardButton(text='• Ваш институт государственный или частный?')],
+            [KeyboardButton(text='• Предусмотрены ли бюджетные места для поступления?')],
+            [KeyboardButton(text='• Могу ли я обучаться заочно?')],
+            [KeyboardButton(text='• Что нужно для поступления?')],
             [KeyboardButton(text='⬅️ В главное меню')]
         ],
         resize_keyboard=True

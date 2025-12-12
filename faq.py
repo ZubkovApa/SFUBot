@@ -14,7 +14,7 @@ async def faq_menu(message: Message):
     )
 
 # Конкретные вопросы
-@faq_router.message(lambda message: message.text == 'Ваш институт государственный или частный?')
+@faq_router.message(lambda message: message.text == '• Ваш институт государственный или частный?')
 async def faq_price(message: Message):
     await message.answer(
         "Наш институт является государственным, "
@@ -26,14 +26,14 @@ async def faq_price(message: Message):
         reply_markup=get_faq_keyboard()
     )
 
-@faq_router.message(lambda message: message.text == 'Предусмотрены ли бюджетные места для поступления?')
+@faq_router.message(lambda message: message.text == '• Предусмотрены ли бюджетные места для поступления?')
 async def faq_duration(message: Message):
     await message.answer(
         "Нет, обучение проводится полностью на платной основе.",
         reply_markup=get_faq_keyboard()
     )
 
-@faq_router.message(lambda message: message.text == 'Могу ли я обучаться заочно?')
+@faq_router.message(lambda message: message.text == '• Могу ли я обучаться заочно?')
 async def faq_start(message: Message):
     await message.answer(
         "Заочная форма обучения предусмотрена только для направления магистратуры:\n"
@@ -41,7 +41,7 @@ async def faq_start(message: Message):
         reply_markup=get_faq_keyboard()
     )
 
-@faq_router.message(lambda message: message.text == 'Что нужно для поступления?')
+@faq_router.message(lambda message: message.text == '• Что нужно для поступления?')
 async def faq_requirements(message: Message):
     await message.answer(
         "Необходимо иметь аттестат о среднем (полном) образовании и набрать минимальное количество баллов ЕГЭ.\n"

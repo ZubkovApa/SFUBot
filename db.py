@@ -19,6 +19,7 @@ class Database:
                     user_id INTEGER UNIQUE,
                     first_name TEXT,
                     last_name TEXT,
+                    patronymic TEXT,
                     email TEXT,
                     phone TEXT,
                     city TEXT,
@@ -34,13 +35,13 @@ class Database:
             result = self.cursor.execute('SELECT * FROM users WHERE user_id = ?', (user_id,)).fetchone()
             return result is not None
 
-    def add_user(self, user_id, first_name, last_name, email, phone, city, course):
+    def add_user(self, user_id, first_name, last_name, patronymic, email, phone, city, course):
         """Добавляет нового пользователя"""
         with self.connection:
             self.cursor.execute('''
-                INSERT INTO users (user_id, first_name, last_name, email, phone, city, course)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
-            ''', (user_id, first_name, last_name, email, phone, city, course))
+                INSERT INTO users (user_id, first_name, last_name, patronymic, email, phone, city, course)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            ''', (user_id, first_name, last_name, patronymic, email, phone, city, course))
             self.connection.commit()
             logger.info(f"Добавлен новый пользователь: {first_name} {last_name} (ID: {user_id})")
 

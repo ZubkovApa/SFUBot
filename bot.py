@@ -11,7 +11,6 @@ from aiogram.fsm.context import FSMContext
 from config import BOT_TOKEN
 from keyboard import main_keyboard
 from db import Database
-from survey import Survey  # Импортируем состояния анкеты
 
 # Настройка логирования
 logging.basicConfig(level=logging.INFO)
@@ -42,20 +41,18 @@ dp.include_router(about_router)
 dp.include_router(links_router)
 
 
-# Команда /startё
+# Команда /start
 @dp.message(Command("start"))
-async def cmd_start(message: Message, state: FSMContext):
+async def cmd_start(message: Message, state: FSMContext):  # ДОБАВЬТЕ state!
     user_id = message.from_user.id
 
     if db.user_exists(user_id):
-        # Пользователь уже заполнил анкету - показываем главное меню
         await message.answer(
-            "🎓 С возвращением!\n\n"
+            "🎓 С возвращением в Школу Гастрономии!\n\n"
             "Выберите действие:",
             reply_markup=main_keyboard
         )
     else:
-        # Новый пользователь - сразу запускаем анкету
         await message.answer(
             "👋 Приветствуем в Школе Гастрономии!\n\n"
             "Для начала работы заполните, пожалуйста, анкету.\n"
@@ -63,14 +60,15 @@ async def cmd_start(message: Message, state: FSMContext):
             reply_markup=ReplyKeyboardRemove()
         )
 
-        # Устанавливаем первое состояние анкеты
+        # Импортируем Survey здесь чтобы избежать циклического импорта
+        from survey import Survey
         await state.set_state(Survey.first_name)
         await message.answer("Введите ваше имя:")
 
 
-# Главное меню после анкеты
+# Обработка кнопки "Назад в меню"
 @dp.message(lambda message: message.text == '⬅️ В главное меню')
-async def back_to_main_menu(message: Message):
+async def handle_back_button(message: Message):
     await message.answer("Главное меню:", reply_markup=main_keyboard)
 
 

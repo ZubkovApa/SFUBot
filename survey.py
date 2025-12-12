@@ -14,6 +14,7 @@ survey_router = Router()
 class Survey(StatesGroup):
     first_name = State()
     last_name = State()
+    patronymic = State()
     email = State()
     phone = State()
     city = State()
@@ -32,6 +33,14 @@ async def process_first_name(message: Message, state: FSMContext):
 @survey_router.message(Survey.last_name)
 async def process_last_name(message: Message, state: FSMContext):
     await state.update_data(last_name=message.text)
+    await state.set_state(Survey.patronymic)
+    await message.answer("Введите ваше отчество:")
+
+
+# Обработчик отчества
+@survey_router.message(Survey.patronymic)
+async def process_patronymic(message: Message, state: FSMContext):
+    await state.update_data(patronymic=message.text)
     await state.set_state(Survey.email)
     await message.answer("Введите ваш email:")
 
@@ -79,7 +88,7 @@ async def process_city(message: Message, state: FSMContext):
         resize_keyboard=True
     )
 
-    await message.answer("Выберите интересующий вас курс:", reply_markup=course_keyboard)
+    await message.answer("Выберите интересующий вас класс:", reply_markup=course_keyboard)
 
 
 # Обработчик курса и завершение анкеты
@@ -95,6 +104,7 @@ async def process_course(message: Message, state: FSMContext):
         user_id=user_id,
         first_name=data['first_name'],
         last_name=data['last_name'],
+        patronymic=data['patronymic'],
         email=data['email'],
         phone=data['phone'],
         city=data['city'],
@@ -106,10 +116,11 @@ async def process_course(message: Message, state: FSMContext):
         f"<b>Ваши данные:</b>\n"
         f"👤 <b>Имя:</b> {data['first_name']}\n"
         f"👤 <b>Фамилия:</b> {data['last_name']}\n"
+        f"👤 <b>Отчество:</b> {data['patronymic']}\n"
         f"📧 <b>Email:</b> {data['email']}\n"
         f"📞 <b>Телефон:</b> {data['phone']}\n"
         f"🏙️ <b>Город:</b> {data['city']}\n"
-        f"🎓 <b>Курс:</b> {data['course']}\n\n"
+        f"🎓 <b>Класс:</b> {data['course']}\n\n"
         f"Теперь вам доступны все функции бота!"
     )
 
