@@ -1,6 +1,6 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
-# Главное меню (только для тех, кто заполнил анкету)
+# Главное меню
 main_keyboard = ReplyKeyboardMarkup(
     keyboard=[
         [
@@ -15,7 +15,7 @@ main_keyboard = ReplyKeyboardMarkup(
     resize_keyboard=True
 )
 
-# Клавиатура FAQ (меню выбора вопроса)
+# Меню выбора вопроса
 def get_faq_keyboard():
     return ReplyKeyboardMarkup(
         keyboard=[
@@ -28,7 +28,7 @@ def get_faq_keyboard():
         resize_keyboard=True
     )
 
-# Клавиатура материалов (меню выбора материала)
+# Меню выбора материала
 def get_links_keyboard():
     return ReplyKeyboardMarkup(
         keyboard=[

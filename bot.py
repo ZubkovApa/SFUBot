@@ -6,10 +6,10 @@ from aiogram.filters import Command
 from aiogram.types import Message, ReplyKeyboardRemove
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.client.default import DefaultBotProperties
-from aiogram.fsm.context import FSMContext  # Добавляем импорт
+from aiogram.fsm.context import FSMContext
 
 from config import BOT_TOKEN
-from keyboard import main_keyboard, get_faq_keyboard, get_links_keyboard
+from keyboard import main_keyboard
 from db import Database
 from survey import Survey  # Импортируем состояния анкеты
 
@@ -42,9 +42,9 @@ dp.include_router(about_router)
 dp.include_router(links_router)
 
 
-# Команда /start - только анкета для новых пользователей
+# Команда /startё
 @dp.message(Command("start"))
-async def cmd_start(message: Message, state: FSMContext):  # Добавляем state параметр
+async def cmd_start(message: Message, state: FSMContext):
     user_id = message.from_user.id
 
     if db.user_exists(user_id):

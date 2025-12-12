@@ -27,4 +27,4 @@ async def about_command(message: Message):
 📞 Телефон: +7 (906) 972-74-41
 📧 Почта: postuplenie@gastronomyinstitute.ru
     """
-    await message.answer(about_text, reply_markup=main_keyboard)  # Возврат в главное меню сразу
+    await message.answer(about_text, reply_markup=main_keyboard)  # Возврат в главное меню
