@@ -18,16 +18,16 @@ async def links_menu(message: Message):
 async def links_study(message: Message):
     await message.answer(
         "📚 <b>Образовательные программы:</b>\n\n"
-        "• <a href='https://gastronomyinstitute.ru/vshg'>Высшая школа гастрономии от\nINSTITUT LYFE EXECUTIVE EDUCATION</a>\n"
-        "• <a href='https://gastronomyinstitute.ru/vshrm'>Высшая школа ресторанного менеджмента</a>\n"
-        "• <a href='https://gastronomyinstitute.ru/vshki'>Высшая школа кондитерского искусства</a>\n"
-        "• <a href='https://gastronomyinstitute.ru/vshom'>Высшая школа отельного менеджмента</a>\n"
-        "• <a href='https://gastronomyinstitute.ru/st'>Стратегическое управление в индустрии гостеприимства</a>",
+        "<a href='https://gastronomyinstitute.ru/vshg'>🍳 Высшая школа гастрономии от\nINSTITUT LYFE EXECUTIVE EDUCATION</a>\n"
+        "<a href='https://gastronomyinstitute.ru/vshrm'>👤 Высшая школа ресторанного менеджмента</a>\n"
+        "<a href='https://gastronomyinstitute.ru/vshki'>🎂 Высшая школа кондитерского искусства</a>\n"
+        "<a href='https://gastronomyinstitute.ru/vshom'>🏢 Высшая школа отельного менеджмента</a>\n"
+        "<a href='https://gastronomyinstitute.ru/st'>👓 Стратегическое управление в индустрии гостеприимства</a>",
         disable_web_page_preview=True,
         reply_markup=get_links_keyboard()
     )
 
-@links_router.message(lambda message: message.text == '🍳 Наши соцсети')
+@links_router.message(lambda message: message.text == '🛜 Наши соцсети')
 async def links_practice(message: Message):
     await message.answer(
         "🍳 <b>Наши соцсети:</b>\n\n"

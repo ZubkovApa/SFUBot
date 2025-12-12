@@ -26,7 +26,10 @@ class Survey(StatesGroup):
 async def process_first_name(message: Message, state: FSMContext):
     await state.update_data(first_name=message.text)
     await state.set_state(Survey.last_name)
-    await message.answer("Введите вашу фамилию:")
+    await message.answer(
+        f"👋 Приятно познакомиться, {message.text}!\n\n"
+        "💬 <b>Теперь напишите вашу фамилию:</b>"
+    )
 
 
 # Обработчик фамилии
@@ -34,7 +37,9 @@ async def process_first_name(message: Message, state: FSMContext):
 async def process_last_name(message: Message, state: FSMContext):
     await state.update_data(last_name=message.text)
     await state.set_state(Survey.patronymic)
-    await message.answer("Введите ваше отчество:")
+    await message.answer(
+        "👋 Отлично!\n\n"
+        "💬 <b>Напишите ваше отчество:</b>")
 
 
 # Обработчик отчества
@@ -42,7 +47,10 @@ async def process_last_name(message: Message, state: FSMContext):
 async def process_patronymic(message: Message, state: FSMContext):
     await state.update_data(patronymic=message.text)
     await state.set_state(Survey.email)
-    await message.answer("Введите ваш email:")
+    await message.answer(
+        "📧 <b>Отлично! Теперь укажите ваш email:</b>\n\n"
+        "<i>На этот адрес мы будем присылать важную информацию о курсе</i>"
+    )
 
 
 # Обработчик email
@@ -50,12 +58,21 @@ async def process_patronymic(message: Message, state: FSMContext):
 async def process_email(message: Message, state: FSMContext):
     # Простая валидация email
     if '@' not in message.text or '.' not in message.text:
-        await message.answer("Пожалуйста, введите корректный email (например: example@mail.com):")
+        await message.answer(
+            "📧 <b>Кажется, email указан неправильно.</b>\n\n"
+            "Пожалуйста, введите корректный email, например:\n"
+            "<code>ivanov@gmail.com</code>\n\n"
+            "<i>Это нужно для связи с вами</i>"
+        )
         return
 
     await state.update_data(email=message.text)
     await state.set_state(Survey.phone)
-    await message.answer("Введите ваш номер телефона:")
+    await message.answer(
+        "📱 <b>Прекрасно! Теперь ваш номер телефона:</b>\n\n"
+        "<i>Нужен для экстренной связи и уточнения деталей</i>\n"
+        "В формате: 79991234567",
+    )
 
 
 # Обработчик телефона
@@ -63,11 +80,18 @@ async def process_email(message: Message, state: FSMContext):
 async def process_phone(message: Message, state: FSMContext):
     # Простая валидация номера телефона
     if len(message.text) != 11 or ('7' not in message.text and '8' not in message.text):
-        await message.answer("Пожалуйста, введите корректный номер телефона (например: 79991234567):")
+        await message.answer(
+            "📱 <b>Номер телефона введен некорректно.</b>\n\n"
+            "Пожалуйста, проверьте и введите еще раз:\n"
+            "<i>Пример: 79991234567</i>",
+        )
         return
     await state.update_data(phone=message.text)
     await state.set_state(Survey.city)
-    await message.answer("Введите ваш город:")
+    await message.answer(
+        "🏙️ <b>Замечательно! В каком городе вы живете?</b>\n\n"
+        "<i>Это поможет нам подобрать для вас оптимальный формат обучения</i>"
+    )
 
 
 # Обработчик города
@@ -79,16 +103,21 @@ async def process_city(message: Message, state: FSMContext):
     # Клавиатура для выбора курса
     course_keyboard = ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton(text="Школа гастрономии")],
-            [KeyboardButton(text="Школа ресторанного менеджмента")],
-            [KeyboardButton(text="Школа кондитерского искусства")],
-            [KeyboardButton(text="Школа отельного менеджмента")],
-            [KeyboardButton(text="Стратегическое управление в индустрии гостеприимства")]
+            [KeyboardButton(text="🍳 Школа гастрономии")],
+            [KeyboardButton(text="👤 Школа ресторанного менеджмента")],
+            [KeyboardButton(text="🎂 Школа кондитерского искусства")],
+            [KeyboardButton(text="🏢 Школа отельного менеджмента")],
+            [KeyboardButton(text="👓 Стратегическое управление в индустрии гостеприимства")]
         ],
         resize_keyboard=True
     )
 
-    await message.answer("Выберите интересующий вас класс:", reply_markup=course_keyboard)
+    await message.answer(
+        "🎯 <b>И последний, но не по важностии вопрос!</b>\n\n"
+        "✨ <b>Какой курс вас интересует?</b>\n\n"
+        "Выберите направление:",
+        reply_markup=course_keyboard
+    )
 
 
 # Обработчик курса и завершение анкеты
