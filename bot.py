@@ -6,10 +6,12 @@ from aiogram.filters import Command
 from aiogram.types import Message, ReplyKeyboardRemove
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.client.default import DefaultBotProperties
+from aiogram.fsm.context import FSMContext  # Добавляем импорт
 
 from config import BOT_TOKEN
 from keyboard import main_keyboard, get_faq_keyboard, get_links_keyboard
 from db import Database
+from survey import Survey  # Импортируем состояния анкеты
 
 # Настройка логирования
 logging.basicConfig(level=logging.INFO)
@@ -42,7 +44,7 @@ dp.include_router(links_router)
 
 # Команда /start - только анкета для новых пользователей
 @dp.message(Command("start"))
-async def cmd_start(message: Message):
+async def cmd_start(message: Message, state: FSMContext):  # Добавляем state параметр
     user_id = message.from_user.id
 
     if db.user_exists(user_id):
@@ -61,16 +63,8 @@ async def cmd_start(message: Message):
             reply_markup=ReplyKeyboardRemove()
         )
 
-        # Импортируем здесь чтобы избежать циклических импортов
-        from survey import Survey
-        from aiogram.fsm.context import FSMContext
-
-        # Устанавливаем состояние анкеты
-        await dp.storage.set_state(
-            chat=message.chat.id,
-            user=user_id,
-            state=Survey.first_name
-        )
+        # Устанавливаем первое состояние анкеты
+        await state.set_state(Survey.first_name)
         await message.answer("Введите ваше имя:")
 
 

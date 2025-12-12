@@ -59,21 +59,21 @@ async def faq_requirements(message: Message):
         reply_markup=get_faq_keyboard()
     )
 
-    @faq_router.message(lambda message: message.text == '📞 Контакты')
-    async def contacts_command(message: Message):
-        contacts_text = """
-    📞 <b>Связь с администратором</b>
+@faq_router.message(lambda message: message.text == '📞 Контакты')
+async def contacts_command(message: Message):
+    contacts_text = """
+📞 <b>Связь с администратором</b>
 
-    <b>Контактные данные:</b>
-    👨‍💼 <b>Администратор:</b> Анна Петрова
-    📞 <b>Телефон:</b> +7 (495) 765-43-21
-    📧 <b>Email:</b> admin@gastroschool.ru
-    💬 <b>Telegram:</b> @gastro_admin
+<b>Контактные данные:</b>
+👨‍💼 <b>Администратор:</b> Анна Петрова
+📞 <b>Телефон:</b> +7 (495) 765-43-21
+📧 <b>Email:</b> admin@gastroschool.ru
+💬 <b>Telegram:</b> @gastro_admin
 
-    <b>Время для связи:</b>
-    ⌚ Пн-Пт: 10:00 - 19:00
-    ⌚ Суббота: 11:00 - 16:00
-    🚫 Воскресенье: выходной
-        """
-        await message.answer(contacts_text, reply_markup=main_keyboard)
+<b>Время для связи:</b>
+⌚ Пн-Пт: 10:00 - 19:00
+⌚ Суббота: 11:00 - 16:00
+🚫 Воскресенье: выходной
+    """
+    await message.answer(contacts_text, reply_markup=main_keyboard)
 
