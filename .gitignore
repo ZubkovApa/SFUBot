@@ -9,6 +9,7 @@ data/database.db
 data/*.db
 *.db
 *.sqlite3
+*.sqlite
 *.db-journal
 
 # Директории IDE
