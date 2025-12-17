@@ -43,12 +43,12 @@ dp.include_router(links_router)
 
 # Команда /start
 @dp.message(Command("start"))
-async def cmd_start(message: Message, state: FSMContext):  # ДОБАВЬТЕ state!
+async def cmd_start(message: Message, state: FSMContext):
     user_id = message.from_user.id
 
     if db.user_exists(user_id):
         await message.answer(
-            "🌟 <b>С возвращением в Школу Гастрономии!</b>\n\n"
+            "🌟 <b>С возвращением в Институт Гастрономии!</b>\n\n"
             "Рады снова вас видеть! Чем могу помочь?",
             reply_markup=main_keyboard
         )
