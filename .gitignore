@@ -25,6 +25,7 @@ __pycache__/
 *.temp
 
 # Питоновские виртуальные окружения
-venv/
-env/
-ENV/
+.venv
+.env
+.ENV
+*.pyc
